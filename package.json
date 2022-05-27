@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/4GeeksAcademy/vanillajs-hello/issues"
   },
-  "homepage": "https://github.com/4GeeksAcademy/vanillajs-hello#readme",
+  "homepage": "./src/index.html",
   "dependencies": {
     "@popperjs/core": "^2.10.1",
     "bootstrap": "^5.1.1"
