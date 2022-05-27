@@ -69,14 +69,15 @@ const generateNewCard = () => {
   // update variables
   cardIndex += 1;
   cards += 2;
-  console.log(cardIndex);
 };
 
 const timer = () => {
   let segs = 10;
   const $timer = document.querySelector("#timer");
+  let autoDrawActive = true;
 
-  setInterval(() => {
+  // start onload counting
+  let interval = setInterval(() => {
     if (segs > 0) {
       $timer.innerHTML = `&nbsp${segs} segs`;
       segs -= 1;
@@ -85,14 +86,35 @@ const timer = () => {
       segs = 10;
     }
   }, 1000);
+
+  //toggle counting with button
+  const $stop = document.querySelector("#stop");
+  $stop.addEventListener("click", () => {
+    autoDrawActive = !autoDrawActive;
+    if (autoDrawActive) {
+      interval = setInterval(() => {
+        if (segs > 0) {
+          $timer.innerHTML = `&nbsp${segs} segs`;
+          segs -= 1;
+        } else {
+          generateNewCard();
+          segs = 10;
+        }
+      }, 1000);
+      $stop.textContent = "Stop Auto Draw";
+    } else {
+      $stop.textContent = "Activate Auto Draw";
+      clearInterval(interval);
+    }
+  });
 };
 
 // RENDER --------------------------------------
 
 // Load First Card
 window.onload = () => {
-  generateNewCard();
   timer();
+  generateNewCard();
 };
 
 // add new card through button
